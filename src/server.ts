@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import app from './app'
 import config from './config'
-import logger from './share/logger'
+import { logger, errorlogger } from './share/logger'
 
 async function boostrap() {
   try {
@@ -12,7 +12,7 @@ async function boostrap() {
       logger.info(`Example app listening on port ${config.port}`)
     })
   } catch (err) {
-    logger.error('Failed to connection in database ', err)
+    errorlogger.error('Failed to connection in database ', err)
   }
 
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
