@@ -1,7 +1,10 @@
 import mongoose from 'mongoose'
 import { IGenericErrorMessage } from '../interfaces/error'
+import { IGenericErrorResponse } from '../interfaces/common'
 
-const handleValidationError = (err: mongoose.Error.ValidationError) => {
+const handleValidationError = (
+  err: mongoose.Error.ValidationError
+): IGenericErrorResponse => {
   const errors: IGenericErrorMessage[] = Object.values(err.errors).map(
     (el: mongoose.Error.ValidationError | mongoose.Error.CastError) => {
       return {
@@ -12,6 +15,10 @@ const handleValidationError = (err: mongoose.Error.ValidationError) => {
   )
   const statusCode = 400
   return {
-    // next video
+    statusCode,
+    message: 'Validation Error',
+    errorMessage: errors,
   }
 }
+
+export default handleValidationError
