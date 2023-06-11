@@ -1,14 +1,8 @@
-import express, {
-  Application,
-  NextFunction,
-  Request,
-  Response,
-  request,
-} from 'express'
+import express, { Application, NextFunction, Request, Response } from 'express'
 import cors from 'cors'
-import userRouter from './app/mogules/users/user.route'
-import userService from './app/mogules/users/user.service'
+
 import globalErrorHandler from './app/middleware/globalErrorHandler'
+import { UserRoute } from './app/mogules/users/user.route'
 
 const app: Application = express()
 app.use(cors())
@@ -18,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Application routes
-app.use('/api/v1/users/', userRouter)
+app.use('/api/v1/users/', UserRoute)
 
 // Testing
 app.get(
