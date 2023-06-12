@@ -4,9 +4,15 @@ import config from './config'
 import { logger, errorlogger } from './share/logger'
 import { Server } from 'http'
 
-async function boostrap() {
-  let server: Server
+process.on('uncaughtException', error => {
+  // console.log('Uncaught exception is detected')
+  errorlogger.error(error)
+  process.exit(1)
+})
 
+let server: Server
+
+async function boostrap() {
   try {
     // await mongoose.connect("mongodb://127.0.0.1:27017/test");
     await mongoose.connect(config.database_url as string)
@@ -18,7 +24,7 @@ async function boostrap() {
     errorlogger.error('Failed to connection in database ', err)
   }
   process.on('unhandledRejection', error => {
-    console.log('Unhandled Rejection is detected')
+    // console.log('Unhandled Rejection is detected')
     if (server) {
       server.close(() => {
         errorlogger.error(error)
@@ -30,3 +36,12 @@ async function boostrap() {
   })
 }
 boostrap()
+
+// console.log(x)
+
+process.on('SIGTERM', () => {
+  logger.info('SIGTERM is received')
+  if (server) {
+    server.close()
+  }
+})
