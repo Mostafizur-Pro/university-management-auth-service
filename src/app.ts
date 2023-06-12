@@ -3,6 +3,7 @@ import cors from 'cors'
 
 import globalErrorHandler from './app/middleware/globalErrorHandler'
 import { UserRoute } from './app/mogules/users/user.route'
+import ApiError from './error/ApiError'
 
 const app: Application = express()
 app.use(cors())
@@ -15,14 +16,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/v1/users/', UserRoute)
 
 // Testing
-app.get(
-  '/',
-  /* async */ (req: Request, res: Response, next: NextFunction) => {
-    // res.send('Working successfully')
-    throw new Error('Ore Baba Error')
-    // next('Ore baba aito dekhi error')
-  }
-)
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+  // throw new ApiError(400, 'Ore Baba Error')
+  // Promise.reject(new Error('Unhanlder Promise Rejection'))
+  // console.log(x)
+  throw new Error('Testing Error')
+})
 
 // Global error handler
 app.use(globalErrorHandler)
