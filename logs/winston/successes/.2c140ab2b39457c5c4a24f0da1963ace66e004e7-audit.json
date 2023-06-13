@@ -64,6 +64,16 @@
             "date": 1686671350174,
             "name": "E:\\Level-2\\mission 3\\university-management-auth-service\\logs\\winston\\successes\\phu-$DATE%-success.log.2023-06-13-21",
             "hash": "c01b0d5577942722d55357f68a127ec68d68292c05643748f616230fb6435f0a"
+        },
+        {
+            "date": 1686674893088,
+            "name": "E:\\Level-2\\mission 3\\university-management-auth-service\\logs\\winston\\successes\\phu-$DATE%-success.log.2023-06-13-22",
+            "hash": "fb1200025e7debd626641297bd40c0a7b30579da05324a8de27a90765534a63d"
+        },
+        {
+            "date": 1686675728409,
+            "name": "E:\\Level-2\\mission 3\\university-management-auth-service\\logs\\winston\\successes\\phu-$DATE%-success.log.2023-06-13-23",
+            "hash": "0fc1a4d1109dd06626bfc8a13f4ca8ba03bee9879dcfb6e346c110b8d9b829fa"
         }
     ],
     "hashType": "sha256"
