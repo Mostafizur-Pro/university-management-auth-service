@@ -118,3 +118,15 @@
   label: 'right new!',
   timestamp: '2023-06-15T15:58:23.931Z'
 }
+{
+  message: 'Database is Connected successfully',
+  level: 'info',
+  label: 'right new!',
+  timestamp: '2023-06-15T15:58:34.933Z'
+}
+{
+  message: 'Example app listening on port 5000',
+  level: 'info',
+  label: 'right new!',
+  timestamp: '2023-06-15T15:58:35.002Z'
+}
