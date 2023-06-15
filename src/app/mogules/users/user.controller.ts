@@ -8,17 +8,15 @@ const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { user } = req.body
     const result = await UserService.createUser(user)
-    next()
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "User created successfully"
-      data: result
+      message: 'User created successfully',
+      data: result,
     })
-   
+    next()
   }
 )
 
-// export default { createUser }
 export const UserController = { createUser }
