@@ -8,7 +8,7 @@ import { paginationFields } from '../../../constants/pagination'
 import { IAcademicSemester } from './academicSemester.interface'
 import { academicSemesterFilterableFields } from './academicSemester.constant'
 
-const createSemester: RequestHandler = catchAsync(
+const createSemester = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { ...academicSemesterData } = req.body
     const result = await AcademicSemesterService.createSemester(
@@ -46,5 +46,23 @@ const getAllSemesters = catchAsync(
     next()
   }
 )
+const getSingleSemesters = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id
+    const result = await AcademicSemesterService.getSingleSemester(id)
 
-export const AcademicSemesterController = { createSemester, getAllSemesters }
+    sendResponse<IAcademicSemester>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Semester retrieved successfully',
+      data: result,
+    })
+    next()
+  }
+)
+
+export const AcademicSemesterController = {
+  createSemester,
+  getSingleSemesters,
+  getAllSemesters,
+}
