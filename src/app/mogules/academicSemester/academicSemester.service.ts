@@ -4,11 +4,11 @@ import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
 import { IAcademicSemester } from './academicSemester.interface'
 import { AcademicSemester } from './academicSemester.model'
 import { IPaginationOptions } from '../../../interfaces/pagination'
+import { IGenericResponse } from '../../../interfaces/common'
 
 const createSemester = async (
   payload: IAcademicSemester
 ): Promise<IAcademicSemester> => {
-  // summer 02 !== 03
   if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semester Code')
   }
@@ -16,16 +16,33 @@ const createSemester = async (
   return result
 }
 
-// type IPaginationOptions = {
-//   page: number
-//   limit: number
-//   sortBy: string
-//   sortOrder: string
+// type IGenericResponse<T> = {
+//   meta: {
+//     page?: number
+//     limit: number
+//     total: number
+//   }
+//   data: T
 // }
 
-const getAllSemesters = (paginationOptions: IPaginationOptions) => {}
+const getAllSemesters = async (
+  paginationOptions: IPaginationOptions
+): Promise<IGenericResponse<IAcademicSemester[]>> => {
+  const { page = 1, limit = 10 } = paginationOptions
+  const skip = (page - 1) * limit
+  const result = await AcademicSemester.find().sort().skip(skip).limit(limit)
+  const total = await AcademicSemester.countDocuments()
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  }
+}
 
 export const AcademicSemesterService = {
   createSemester,
-  IPaginationOptions,
+  getAllSemesters,
 }

@@ -1,0 +1,5 @@
+Fri Jun 16 2023 8:36:19 [right new!] error: Failed to connection in database  querySrv ECONNREFUSED _mongodb._tcp.cluster0.5xecsyp.mongodb.net
+Fri Jun 16 2023 8:36:48 [right new!] error: Failed to connection in database  querySrv ECONNREFUSED _mongodb._tcp.cluster0.5xecsyp.mongodb.net
+Fri Jun 16 2023 8:36:53 [right new!] error: Failed to connection in database  querySrv ECONNREFUSED _mongodb._tcp.cluster0.5xecsyp.mongodb.net
+Fri Jun 16 2023 8:37:5 [right new!] error: Failed to connection in database  querySrv ECONNREFUSED _mongodb._tcp.cluster0.5xecsyp.mongodb.net
+Fri Jun 16 2023 8:37:12 [right new!] error: Failed to connection in database  querySrv ECONNREFUSED _mongodb._tcp.cluster0.5xecsyp.mongodb.net
