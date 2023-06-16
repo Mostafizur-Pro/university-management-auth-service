@@ -1,6 +1,9 @@
 import httpStatus from 'http-status'
 import ApiError from '../../../error/ApiError'
-import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
+import {
+  academicSemesterSearchableFields,
+  academicSemesterTitleCodeMapper,
+} from './academicSemester.constant'
 import {
   IAcademicSemester,
   IAcademicSemesterFilters,
@@ -25,9 +28,9 @@ const getAllSemesters = async (
   filters: IAcademicSemesterFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
-  const { searchTerm } = filters
+  const { searchTerm, ...filterData } = filters
 
-  const academicSemesterSearchableFields = ['title', 'code', 'year']
+  // const academicSemesterSearchableFields = ['title', 'code', 'year'] contant
   const andConditions = []
   if (searchTerm) {
     andConditions.push({
@@ -39,7 +42,13 @@ const getAllSemesters = async (
       })),
     })
   }
-
+  if (Object.keys(filterData).length) {
+    andConditions.push({
+      $and: Object.entries(filterData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    })
+  }
   // const andConditions = [
   //   {
   //     $or: [
@@ -64,6 +73,7 @@ const getAllSemesters = async (
   //     ],
   //   },
   // ]
+
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions)
 
