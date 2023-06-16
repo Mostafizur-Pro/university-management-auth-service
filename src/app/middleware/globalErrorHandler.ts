@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-expressions
 import { ErrorRequestHandler } from 'express'
 import { IGenericErrorMessage } from '../../interfaces/error'
 import handleValidationError from '../../error/handleValidationError'
@@ -9,7 +10,8 @@ import handleZodError from '../../error/handleZodError'
 import handleCastError from '../../error/handleCastError'
 
 // Global error handler
-const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (error, req, res) => {
+  // eslint-disable-next-line no-unused-expressions
   config.env === 'development'
     ? console.log(`globalErrorHandler`, error)
     : errorlogger.error(`globalErrorHandler`, error)
@@ -63,8 +65,6 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     errorMessage,
     stack: config.env !== 'production' ? error?.stack : undefined,
   })
-
-  next()
 }
 
 export default globalErrorHandler
