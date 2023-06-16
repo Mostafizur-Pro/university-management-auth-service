@@ -1,7 +1,10 @@
 import httpStatus from 'http-status'
 import ApiError from '../../../error/ApiError'
 import { academicSemesterTitleCodeMapper } from './academicSemester.constant'
-import { IAcademicSemester } from './academicSemester.interface'
+import {
+  IAcademicSemester,
+  IAcademicSemesterFilters,
+} from './academicSemester.interface'
 import { AcademicSemester } from './academicSemester.model'
 import { IPaginationOptions } from '../../../interfaces/pagination'
 import { IGenericResponse } from '../../../interfaces/common'
@@ -17,8 +20,12 @@ const createSemester = async (
   const result = await AcademicSemester.create(payload)
   return result
 }
+// type IAcademicSemesterFilters = {
+//   searchTerm: string
+// }
 
 const getAllSemesters = async (
+  filters: IAcademicSemesterFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IAcademicSemester[]>> => {
   const { page, limit, skip, sortBy, sortOrder } =
